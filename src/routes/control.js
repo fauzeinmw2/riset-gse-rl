@@ -29,21 +29,23 @@ router.get("/mode", (req, res) => {
 // set action/mode (called by RL agent)
 router.post("/action", (req, res) => {
   const { action } = req.body;
-  // action: 'increase_performance' | 'reduce_performance' | 'maintain'
-  if (!["increase_performance", "reduce_performance", "maintain"].includes(action)) {
+
+  // Action yang diizinkan (NEW)
+  const allowed = ["scale_up_limit", "scale_down_limit", "normal"];
+
+  if (!allowed.includes(action)) {
     return res.status(400).json({ error: "invalid action" });
   }
 
-  // Apply action — implement effect here.
-  // For simplicity: we toggle a variable `current_mode`. Your app can read current_mode to change behavior.
-  if (action === "increase_performance") current_mode = "performance";
-  else if (action === "reduce_performance") current_mode = "energy";
-  else current_mode = "normal";
+  // Ubah current_mode sesuai action
+  if (action === "scale_up_limit") current_mode = "performance";
+  else if (action === "scale_down_limit") current_mode = "energy";
+  else current_mode = "normal"; // fallback
 
-  // Optionally adjust app config: e.g., change concurrency setting in-memory, or call internal functions.
-  // For demo we just save the mode. Extend this to change worker pools or resource limits.
+  // Bisa ditambahkan efek lain (misalnya ubah limit concurrency fungsi tertentu)
 
   res.json({ ok: true, mode: current_mode });
 });
+
 
 export default router;
