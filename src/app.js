@@ -4,6 +4,7 @@ import { trackLatency } from "./monitor/performanceStats.js";
 import usersRouter from "./routes/users.js";
 import monitorRoutes from "./routes/monitor.js";
 import controlRoutes from "./routes/control.js";
+import orderRoutes from "./routes/orders.js";
 
 import enforceRAM from "../middleware/enforceRAM.js";
 import enforceCPU from "../middleware/enforceCPU.js";
@@ -23,6 +24,7 @@ app.get("/", (req, res) => res.send("API is running"));
 app.use("/users", usersRouter);
 app.use("/monitor", monitorRoutes);
 app.use("/control", controlRoutes);
+app.use("/orders", orderRoutes);
 
 const PORT = process.env.PORT || 3000;
 
