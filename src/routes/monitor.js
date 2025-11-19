@@ -1,6 +1,8 @@
 import express from "express";
 import { getSystemStats } from "../monitor/systemStats.js";
 import { getPerformanceStats } from "../monitor/performanceStats.js";
+import { getResourceLimit } from "../../config/resourceManager.js";
+import pidusage from "pidusage";
 
 const router = express.Router();
 
@@ -15,12 +17,13 @@ router.get("/performance", (req, res) => {
 });
 
 router.get("/summary", async (req, res) => {
-  const system = await getSystemStats();
-  const performance = getPerformanceStats();
+  const limits = getResourceLimit();
+  const stats = await pidusage(process.pid);
 
   return res.json({
-    ...system,
-    ...performance
+    cpu: stats.cpu.toFixed(2),
+    ram: (process.memoryUsage().rss / 1024 / 1024).toFixed(2),
+    limit: limits
   });
 });
 
