@@ -17,14 +17,11 @@ app.use(cors());
 app.use(express.json());
 app.use(trackLatency);
 
-app.use(enforceRAM);
-app.use(enforceCPU);
-
 app.get("/", (req, res) => res.send("API is running"));
-app.use("/users", usersRouter);
+app.use("/users", usersRouter, enforceCPU, enforceRAM);
 app.use("/monitor", monitorRoutes);
 app.use("/control", controlRoutes);
-app.use("/orders", orderRoutes);
+app.use("/orders", orderRoutes, enforceCPU, enforceRAM);
 
 const PORT = process.env.PORT || 3000;
 
