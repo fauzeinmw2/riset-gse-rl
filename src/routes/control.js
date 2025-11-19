@@ -1,5 +1,6 @@
 // src/routes/control.js
 import express from "express";
+import {applyAction} from "../../config/resourceManager.js";
 const router = express.Router();
 
 // simple in-memory globals (persist ke DB nanti jika perlu)
