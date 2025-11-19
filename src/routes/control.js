@@ -37,6 +37,8 @@ router.post("/action", (req, res) => {
     return res.status(400).json({ error: "invalid action" });
   }
 
+  applyAction(action);
+
   // Ubah current_mode sesuai action
   if (action === "scale_up_limit") current_mode = "performance";
   else if (action === "scale_down_limit") current_mode = "energy";
@@ -44,7 +46,7 @@ router.post("/action", (req, res) => {
 
   // Bisa ditambahkan efek lain (misalnya ubah limit concurrency fungsi tertentu)
 
-  res.json({ ok: true, mode: current_mode });
+  res.json({ ok: true, applied: current_mode });
 });
 
 
