@@ -1,6 +1,6 @@
 import os from "os";
 import process from "process";
-import { getResourceLimit } from "./config/resourceManager.js";
+import { getResourceLimit } from "../config/resourceManager.js";
 
 function enforceRAM(req, res, next) {
   const { ramLimitMB } = getResourceLimit();

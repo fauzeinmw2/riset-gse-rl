@@ -5,8 +5,8 @@ import usersRouter from "./routes/users.js";
 import monitorRoutes from "./routes/monitor.js";
 import controlRoutes from "./routes/control.js";
 
-import enforceRAM from "./middleware/enforceRAM.js";
-import enforceCPU from "./middleware/enforceCPU.js";
+import enforceRAM from "../middleware/enforceRAM.js";
+import enforceCPU from "../middleware/enforceCPU.js";
 
 
 

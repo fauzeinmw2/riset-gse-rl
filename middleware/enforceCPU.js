@@ -1,5 +1,5 @@
 import pidusage from "pidusage";
-import { getResourceLimit } from "./config/resourceManager.js";
+import { getResourceLimit } from "../config/resourceManager.js";
 
 async function enforceCPU(req, res, next) {
   const { cpuLimit } = getResourceLimit();
